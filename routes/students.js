@@ -4,7 +4,6 @@ import { ObjectId } from "../db.js"
 
 const router=express.Router()
 
-
 router.get("/:id",async(req,res)=>{
     const {id}=req.params
     console.log(req.params)
