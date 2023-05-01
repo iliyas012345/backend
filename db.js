@@ -1,16 +1,25 @@
-import {MongoClient} from "mongodb"
-import Obj from "mongodb"
-import dotenv from "dotenv"
+import mongoose from "mongoose"
+import dotenv from 'dotenv'
 
 dotenv.config()
 
-const MONGO_URL= process.env.MONGO_URL
 
-async function createConnection(){
-    const client =new MongoClient(MONGO_URL)
-    await client.connect()
-    console.log("mongodb is successfuly connected")
-    return client
+const createConnection = () => {
+    const params = {
+        useNewUrlParser:true,
+        useUnifiedTopology:true
+    }
+
+    try {
+
+        mongoose.connect(process.env.MONGO_URL,params);
+        console.log("Mongodb Connected")
+        
+    } catch (error) {
+        console.log("monodb connection error",error)
+    }
+
+
 }
-export var ObjectId = Obj.ObjectId
-export const client=createConnection()
+
+export default createConnection;
